@@ -25,7 +25,7 @@ def main():
     print("C.", html.unescape(trivia["incorrect_answers"][1]))
     print("D.", html.unescape(trivia["incorrect_answers"][2]))
 
-    user_answer = input("Answer: ")
+    user_answer = input("Answer: ").upper()
 
     if user_answer == "A":
         print("That is correct!")
