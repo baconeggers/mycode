@@ -24,3 +24,4 @@ http://controller:35357/v2/,myproject19,default,wesley,default,alta23
 http://controller:35357/v2/,myproject20,default,xavier,default,alta24
 http://controller:35357/v2/,myproject21,default,yammy,default,alta25
 http://controller:35357/v2/,myproject22,default,zorro,default,alta26
+someurl,projectslappy,default,zinc,adamantium,vibranium

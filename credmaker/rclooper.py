@@ -9,7 +9,7 @@ import os
 os.chdir("/home/student/mycode/credmaker/")
 
 try:
-    user_input = int(input("If you would like to manually input data, press 1\nOtherwise, press 2: "))
+    user_input = int(input("If you would like to manually input data, press 1\nIf you would like to import from csv_users.txt, press 2: "))
     if user_input == 1:
         outFile = open("admin.rc","a")
         osAUTH = input("What is the OS_AUTH_URL? ")
