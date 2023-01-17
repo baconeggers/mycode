@@ -14,31 +14,6 @@ import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-def historical_pull():
-    try:
-        user_dir = input("Please enter the full path to historical .JSON files: ")
-        os.chdir(user_dir)
-        user_data = input("Please enter the file name you would like to export data from: ")
-        if user_data == "quit" or user_data == "q":
-            print("Thank you for trying this tool.")
-            quit()
-        else:
-            with open(user_data,"r", encoding="utf-8") as data:
-                med_data = data.read()
-                clean_data = json.loads(med_data)
-                for track in clean_data:
-                    track_list = track['master_metadata_track_name']
-                    artist_list = track['master_metadata_album_artist_name']
-                    time_stamp = track['ts']
-                    with open("export.csv","a", encoding="utf-8") as export:
-                        export.write(f"{artist_list};{track_list};{time_stamp}\n")
-            print("Your data has been exported to 'export.csv'\nThank you for using this tool!")
-    except FileNotFoundError:
-        print("That file was not found, please try again.")
-        historical_pull()
-    except Exception as err:
-        print("We encountered an unexprected error:", err)
-
 
 def current_pull():
     auth_manager = SpotifyClientCredentials()
@@ -111,12 +86,38 @@ def current_pull():
     else:
         print("\nThat was not a valid search option, please try again.")
         current_pull()
-    
+
+
+def historical_pull():
+    try:
+        user_dir = input("Please enter the full path to historical .JSON files: ")
+        os.chdir(user_dir)
+        user_data = input("Please enter the file name you would like to export data from: ")
+        if user_data == "quit" or user_data == "q":
+            print("Thank you for trying this tool.")
+            quit()
+        else:
+            with open(user_data,"r", encoding="utf-8") as data:
+                med_data = data.read()
+                clean_data = json.loads(med_data)
+                for track in clean_data:
+                    track_title = track['master_metadata_track_name']
+                    artist_name = track['master_metadata_album_artist_name']
+                    time_stamp = track['ts']
+                    with open("export.csv","a", encoding="utf-8") as export:
+                        export.write(f"{artist_name};{track_title};{time_stamp}\n")
+            print("Your data has been exported to 'export.csv'\nThank you for using this tool!")
+    except FileNotFoundError:
+        print("That file was not found, please try again.")
+        historical_pull()
+    except Exception as err:
+        print("We encountered an unexprected error:", err)
+
 
 def main():
     print("Welcome to the Spotify API Parser")
     choice = input("Would you like to pull historical account data, or current streaming information?\nPlease enter either 'Historical', 'Current', or 'Quit'\n")
-    choice = choice.lower()
+    choice.lower()
     if choice == "quit" or choice == "q":
         print("Thank you for trying this tool.")
         quit()
